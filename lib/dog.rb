@@ -57,26 +57,4 @@ class Dog
      found = DB[:conn].execute(sql, id)[0]
     self.new_from_db(found)
   end
-   def self.find_or_create_by(dog)
-    sql = <<-SQL
-    SELECT * FROM dogs
-    WHERE name = ? AND breed = ?
-    LIMIT 1
-    SQL
-     found = DB[:conn].execute(sql, dog[:name], dog[:breed])[0]
-     if found == nil || found.empty?
-      self.create(dog)
-    else
-      self.new_from_db(found)
-    end
-  end
-   def self.find_by_name(n)
-    sql = <<-SQL
-    SELECT * FROM dogs
-    WHERE name = ?
-    LIMIT 1
-    SQL
-     find = DB[:conn].execute(sql, n)[0]
-    self.new_from_db(find)
-  end
- end
+  
